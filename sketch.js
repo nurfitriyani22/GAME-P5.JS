@@ -272,3 +272,39 @@ class Entity {
     }
   }
 }
+class Hero extends Entity {
+  constructor(width, height, x, y, color, map, atk, hp) {
+    super(width, height, x, y, color, map, atk, hp);
+  }
+}
+
+class Monster extends Entity {
+  constructor(width, height, x, y, color, map, atk, hp) {
+    super(width, height, x, y, color, map, atk, hp);
+    this.moveCount = 0;
+  }
+
+  moveRandom() {
+    var direction = Math.floor(Math.random() * 4);
+    if (this.moveCount === 50) {
+      // console.log(direction);
+      if (direction === 0) {
+        // Right
+        this.moveRight();
+      } else if (direction === 1) {
+        // Left
+        this.moveLeft();
+      } else if (direction === 2) {
+        // Up
+        this.moveUp();
+      } else if (direction === 3) {
+        // Down
+        this.moveDown();
+      }
+
+      this.moveCount = 0;
+    } else {
+      this.moveCount++;
+    }
+  }
+}
