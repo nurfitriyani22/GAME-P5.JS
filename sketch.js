@@ -207,3 +207,68 @@ class Map {
     while (currentTime + miliseconds >= new Date().getTime()) { }
   }
 }
+class Entity {
+  constructor(width, height, x, y, color, map, atk, hp) {
+    this.width = width;
+    this.height = height;
+    this.x = x;
+    this.y = y;
+    this.color = color;
+    this.map = map;
+    this.atk = atk;
+    this.hp = hp;
+  }
+
+  getX() {
+    return this.x;
+  }
+
+  getY() {
+    return this.y;
+  }
+
+  getPowerLevel() {
+    return this.atk * 4 + this.hp * 0.5;
+  }
+
+  draw() {
+    //   Draw Entity
+    if (this.color === "green") {
+      fill(0, 255, 0);
+    } else if (this.color === "red") {
+      fill(255, 0, 0);
+    }
+    rect(this.x * 30 + 5, this.y * 30 + 5, this.width, this.height);
+  }
+
+  move(x, y) {
+    if (!this.map.checkCollision(x, y)) {
+      this.x = x;
+      this.y = y;
+    }
+  }
+
+  moveRight() {
+    if (this.x < 13) {
+      this.move(this.x + 1, this.y);
+    }
+  }
+
+  moveLeft() {
+    if (this.x > 1) {
+      this.move(this.x - 1, this.y);
+    }
+  }
+
+  moveDown() {
+    if (this.y < 13) {
+      this.move(this.x, this.y + 1);
+    }
+  }
+
+  moveUp() {
+    if (this.y > 1) {
+      this.move(this.x, this.y - 1);
+    }
+  }
+}
